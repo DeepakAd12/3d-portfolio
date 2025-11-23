@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deepak Adhikari | 3D Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Space Grotesk', 'sans-serif'],
+            },
+            colors: {
+              primary: '#3b82f6',
+              secondary: '#10b981',
+              dark: '#020617', // Slate 950
+              card: '#0f172a', // Slate 900
+            },
+            animation: {
+              'spin-slow': 'spin 15s linear infinite',
+              'float': 'float 6s ease-in-out infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-20px)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom scrollbar for webkit */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #020617; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1e293b; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #334155; 
+      }
+
+      body {
+        background-color: #020617;
+        overflow-x: hidden;
+      }
+
+      /* 3D Scene Styles */
+      .preserve-3d {
+        transform-style: preserve-3d;
+      }
+      
+      .transform-style-3d {
+        transform-style: preserve-3d;
+      }
+      
+      .scene-3d {
+        perspective: 1200px;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      /* Retro Grid Floor */
+      .grid-floor {
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        top: -100%;
+        left: -50%;
+        background-image: 
+          linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+        background-size: 60px 60px;
+        transform: rotateX(80deg);
+        animation: gridMove 15s linear infinite;
+        mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+        -webkit-mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      @keyframes gridMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 0 60px; }
+      }
+
+      /* 3D Text Effect */
+      .text-3d-shadow {
+        text-shadow: 
+          1px 1px 0 rgba(59, 130, 246, 0.2),
+          2px 2px 0 rgba(59, 130, 246, 0.2),
+          3px 3px 0 rgba(59, 130, 246, 0.2),
+          4px 4px 0 rgba(59, 130, 246, 0.2);
+      }
+
+      @media print {
+        @page { margin: 1cm; }
+        body { 
+          background-color: white !important; 
+          color: black !important; 
+          -webkit-print-color-adjust: exact; 
+        }
+        .no-print { display: none !important; }
+        .print-break-avoid { break-inside: avoid; }
+        .grid-floor { display: none; }
+        .scene-3d { perspective: none; }
+        .preserve-3d { transform: none !important; }
+        
+        /* Flatten 3D cards for print */
+        .shadow-2xl, .shadow-lg, .shadow-md { box-shadow: none !important; }
+        * {
+          text-shadow: none !important;
+          animation: none !important;
+          transition: none !important;
+          transform: none !important;
+        }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-[#020617] text-slate-200 antialiased selection:bg-blue-500/30">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
